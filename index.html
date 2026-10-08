@@ -40,7 +40,11 @@
           "@type": "Restaurant",
           "name": "Forno Rosso",
           "servesCuisine": "Pizza napoletana",
-          "address": { "@type": "PostalAddress", "addressLocality": "Vicente López, Buenos Aires", "addressCountry": "AR" },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Vicente López, Buenos Aires",
+            "addressCountry": "AR"
+          },
           "hasMap": "https://www.google.com/maps?cid=7035684792613663495"
         }
       },
@@ -51,7 +55,11 @@
           "@type": "Restaurant",
           "name": "Ti Amo",
           "servesCuisine": "Pizza napoletana",
-          "address": { "@type": "PostalAddress", "addressLocality": "Adrogué, Buenos Aires", "addressCountry": "AR" },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Adrogué, Buenos Aires",
+            "addressCountry": "AR"
+          },
           "hasMap": "https://www.google.com/maps?cid=8872962408084667934"
         }
       },
@@ -62,7 +70,11 @@
           "@type": "Restaurant",
           "name": "Otto",
           "servesCuisine": "Pizza napoletana",
-          "address": { "@type": "PostalAddress", "addressLocality": "Copenhague", "addressCountry": "DK" },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Copenhague",
+            "addressCountry": "DK"
+          },
           "hasMap": "https://www.google.com/maps?cid=12423207744966170354"
         }
       },
@@ -71,10 +83,14 @@
         "position": 4,
         "item": {
           "@type": "Restaurant",
-          "name": "Mamma Italiana",
+          "name": "Trattoria Increscendo",
           "servesCuisine": "Pizza napoletana",
-          "address": { "@type": "PostalAddress", "addressLocality": "Skopje", "addressCountry": "MK" },
-          "hasMap": "https://www.google.com/maps?cid=3219776743063144773"
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Madrid",
+            "addressCountry": "ES"
+          },
+          "hasMap": "https://www.google.com/maps?cid=5222548488980104834"
         }
       },
       {
@@ -82,10 +98,14 @@
         "position": 5,
         "item": {
           "@type": "Restaurant",
-          "name": "Matto Napoletano",
+          "name": "Mamma Italiana",
           "servesCuisine": "Pizza napoletana",
-          "address": { "@type": "PostalAddress", "addressLocality": "Skopje", "addressCountry": "MK" },
-          "hasMap": "https://www.google.com/maps?cid=6639208895034864556"
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Skopje",
+            "addressCountry": "MK"
+          },
+          "hasMap": "https://www.google.com/maps?cid=3219776743063144773"
         }
       },
       {
@@ -93,10 +113,14 @@
         "position": 6,
         "item": {
           "@type": "Restaurant",
-          "name": "GamberoRosso",
+          "name": "Matto Napoletano",
           "servesCuisine": "Pizza napoletana",
-          "address": { "@type": "PostalAddress", "addressLocality": "Praga", "addressCountry": "CZ" },
-          "hasMap": "https://www.google.com/maps?cid=13530394555631328504"
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Skopje",
+            "addressCountry": "MK"
+          },
+          "hasMap": "https://www.google.com/maps?cid=6639208895034864556"
         }
       },
       {
@@ -104,10 +128,14 @@
         "position": 7,
         "item": {
           "@type": "Restaurant",
-          "name": "Trattoria Increscendo",
+          "name": "GamberoRosso",
           "servesCuisine": "Pizza napoletana",
-          "address": { "@type": "PostalAddress", "addressLocality": "Madrid", "addressCountry": "ES" },
-          "hasMap": "https://www.google.com/maps?cid=5222548488980104834"
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Praga",
+            "addressCountry": "CZ"
+          },
+          "hasMap": "https://www.google.com/maps?cid=13530394555631328504"
         }
       }
     ]
@@ -127,7 +155,7 @@
       --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
     * { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
     body {
       margin: 0;
       background: var(--masa);
@@ -152,7 +180,34 @@
 
     /* ---- selector de idioma (funciona sin JavaScript) ---- */
     .lang-radio { position: absolute; opacity: 0; pointer-events: none; }
-    .lang-switch { display: flex; justify-content: flex-end; gap: 6px; padding-top: 16px; }
+    .topbar {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0;
+      background: var(--masa);
+      border-bottom: 1px solid var(--linea);
+    }
+    .lang-switch { display: flex; gap: 6px; }
+
+    /* ---- menú de países (se abre y se cierra sin JavaScript) ---- */
+    .menu { position: relative; }
+    .menu summary { display: inline-flex; align-items: center; gap: 10px; list-style: none; }
+    .menu summary::-webkit-details-marker { display: none; }
+    .menu[open] summary { background: var(--tinta); color: var(--masa); }
+    .burger { width: 15px; height: 2px; background: currentColor; box-shadow: 0 -5px 0 currentColor, 0 5px 0 currentColor; }
+    .menu nav {
+      position: absolute; top: calc(100% + 8px); left: 0;
+      min-width: 240px; padding: 6px;
+      background: #fffaf0;
+      border: 1.5px solid var(--tinta);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(31,26,21,.18);
+    }
+    .menu ul { list-style: none; margin: 0; padding: 0; }
+    .menu a { display: block; padding: 12px 14px; border-radius: 10px; font: 600 18px/1.2 var(--serif); color: inherit; text-decoration: none; }
+    .menu a:hover, .menu a:focus-visible { background: var(--masa); color: var(--pomodoro); }
+
+    .menu summary,
     .lang-switch label {
       font: 600 13px/1 var(--sans);
       letter-spacing: .08em;
@@ -171,7 +226,7 @@
     #lang-en:checked ~ .wrap .es { display: none; }
 
     /* ---- encabezado ---- */
-    header { padding: 34px 0 30px; border-bottom: 2px solid var(--tinta); }
+    header { padding: 28px 0 30px; border-bottom: 2px solid var(--tinta); }
     .kicker {
       font: 600 12px/1 var(--sans);
       letter-spacing: .22em;
@@ -189,33 +244,35 @@
     .intro + .intro { margin-top: 12px; }
     .intro strong { color: var(--basilico); }
 
-    /* ---- países ---- */
-    .pais { padding: 34px 0 6px; }
+    /* ---- países (título grande) ---- */
+    main { display: flex; flex-direction: column; }
+    .pais { padding: 40px 0 4px; scroll-margin-top: 62px; order: var(--es); }
+    #lang-en:checked ~ .wrap .pais { order: var(--en); }
     h2 {
-      display: flex; align-items: baseline; gap: 12px;
-      font: 700 13px/1 var(--sans);
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      margin: 0 0 6px;
+      display: flex; align-items: center; gap: 14px;
+      font: italic 700 clamp(38px, 11.5vw, 58px)/1 var(--serif);
+      letter-spacing: -.015em;
+      margin: 0;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--tinta);
     }
-    h2 .bandera { font-size: 22px; letter-spacing: 0; }
-    h2::after { content: ""; flex: 1; border-bottom: 1.5px solid var(--tinta); transform: translateY(-4px); }
+    h2 .bandera { font-size: .58em; font-style: normal; }
 
-    /* ---- pizzerías: como la carta de una trattoria ---- */
+    /* ---- pizzerías (más chicas, como la carta de una trattoria) ---- */
     .pizzerias { list-style: none; margin: 0; padding: 0; }
-    .pizzeria { padding: 18px 0; border-bottom: 1px dashed var(--linea); }
+    .pizzeria { padding: 14px 0; border-bottom: 1px dashed var(--linea); }
     .pizzeria:last-child { border-bottom: 0; }
-    h3 { font: 700 clamp(27px, 7.5vw, 36px)/1.08 var(--serif); margin: 0; }
+    h3 { font: 700 21px/1.25 var(--serif); margin: 0; }
     h3 a {
       color: inherit;
       text-decoration: underline;
       text-decoration-color: var(--pomodoro);
-      text-decoration-thickness: 3px;
-      text-underline-offset: 5px;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
     }
-    h3 a::after { content: " ↗"; font: 400 .55em var(--sans); color: var(--pomodoro); vertical-align: .35em; }
+    h3 a::after { content: " ↗"; font: 400 .7em var(--sans); color: var(--pomodoro); vertical-align: .2em; }
     h3 a:hover, h3 a:focus-visible { color: var(--pomodoro); }
-    .ciudad { margin: 7px 0 0; font-size: 15px; color: var(--humo); }
+    .ciudad { margin: 3px 0 0; font-size: 14px; color: var(--humo); }
     .nota { margin: 8px 0 0; max-width: 34em; }
 
     footer { margin-top: 30px; padding: 22px 0 46px; border-top: 2px solid var(--tinta); font-size: 14px; color: var(--humo); }
@@ -237,10 +294,41 @@
 
   <div class="wrap">
 
-    <nav class="lang-switch" aria-label="Idioma / Language">
-      <label for="lang-es">ES</label>
-      <label for="lang-en">EN</label>
-    </nav>
+    <!-- ================= BARRA DE ARRIBA: menú de países + idioma =================
+         Al agregar un país, sumá una línea <li> en CADA lista (español e inglés),
+         en el lugar que le toque por orden alfabético. -->
+    <div class="topbar">
+      <details class="menu">
+        <summary>
+          <span class="burger" aria-hidden="true"></span>
+          <span class="es" lang="es">Países</span>
+          <span class="en" lang="en">Countries</span>
+        </summary>
+        <nav aria-label="Países / Countries">
+          <!-- lista en español -->
+          <ul class="es" lang="es">
+            <li><a href="#argentina">🇦🇷 Argentina</a></li>
+            <li><a href="#dinamarca">🇩🇰 Dinamarca</a></li>
+            <li><a href="#espana">🇪🇸 España</a></li>
+            <li><a href="#macedonia-del-norte">🇲🇰 Macedonia del Norte</a></li>
+            <li><a href="#republica-checa">🇨🇿 República Checa</a></li>
+          </ul>
+          <!-- lista en inglés -->
+          <ul class="en" lang="en">
+            <li><a href="#argentina">🇦🇷 Argentina</a></li>
+            <li><a href="#republica-checa">🇨🇿 Czech Republic</a></li>
+            <li><a href="#dinamarca">🇩🇰 Denmark</a></li>
+            <li><a href="#macedonia-del-norte">🇲🇰 North Macedonia</a></li>
+            <li><a href="#espana">🇪🇸 Spain</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <div class="lang-switch" role="group" aria-label="Idioma / Language">
+        <label for="lang-es">ES</label>
+        <label for="lang-en">EN</label>
+      </div>
+    </div>
 
     <!-- ================= INTRO =================
          Cada texto está dos veces: class="es" (español) y class="en" (inglés). -->
@@ -276,14 +364,20 @@
            ║     arriba de todo.                                              ║
            ║                                                                  ║
            ║  CÓMO AGREGAR UN PAÍS                                            ║
-           ║  Copiá un bloque completo, desde <section class="pais"> hasta    ║
-           ║  </section>, pegalo donde quieras y cambiá bandera, nombre del   ║
-           ║  país y pizzerías.                                               ║
+           ║  1. Copiá un bloque completo, desde <section class="pais" ...>   ║
+           ║     hasta </section>, y pegalo donde le toque alfabéticamente.   ║
+           ║  2. Cambiá bandera, nombre del país y pizzerías.                 ║
+           ║  3. Cambiá id="..." por el nombre en minúscula, sin espacios ni  ║
+           ║     acentos (ej: id="italia").                                   ║
+           ║  4. --es y --en son la posición del país en el orden alfabético  ║
+           ║     en español y en inglés. Renumerá los demás países si cambia. ║
+           ║  5. Sumá el país al menú de arriba (las dos listas), con         ║
+           ║     href="#..." igual al id del paso 3.                          ║
            ╚══════════════════════════════════════════════════════════════════╝ -->
 
 
       <!-- ================= ARGENTINA ================= -->
-      <section class="pais">
+      <section class="pais" id="argentina" style="--es:1; --en:1">
         <h2>
           <span class="bandera" aria-hidden="true">🇦🇷</span>
           <span class="es" lang="es">Argentina</span>
@@ -318,7 +412,7 @@
 
 
       <!-- ================= DINAMARCA ================= -->
-      <section class="pais">
+      <section class="pais" id="dinamarca" style="--es:2; --en:3">
         <h2>
           <span class="bandera" aria-hidden="true">🇩🇰</span>
           <span class="es" lang="es">Dinamarca</span>
@@ -338,8 +432,29 @@
       </section>
 
 
+      <!-- ================= ESPAÑA ================= -->
+      <section class="pais" id="espana" style="--es:3; --en:5">
+        <h2>
+          <span class="bandera" aria-hidden="true">🇪🇸</span>
+          <span class="es" lang="es">España</span>
+          <span class="en" lang="en">Spain</span>
+        </h2>
+        <ul class="pizzerias">
+
+          <li class="pizzeria">
+            <h3><a href="https://www.google.com/maps?cid=5222548488980104834" target="_blank" rel="noopener">Trattoria Increscendo</a></h3>
+            <p class="ciudad">
+              <span class="es" lang="es">Arganzuela, Madrid</span>
+              <span class="en" lang="en">Arganzuela, Madrid</span>
+            </p>
+          </li>
+
+        </ul>
+      </section>
+
+
       <!-- ================= MACEDONIA DEL NORTE ================= -->
-      <section class="pais">
+      <section class="pais" id="macedonia-del-norte" style="--es:4; --en:4">
         <h2>
           <span class="bandera" aria-hidden="true">🇲🇰</span>
           <span class="es" lang="es">Macedonia del Norte</span>
@@ -368,7 +483,7 @@
 
 
       <!-- ================= REPÚBLICA CHECA ================= -->
-      <section class="pais">
+      <section class="pais" id="republica-checa" style="--es:5; --en:2">
         <h2>
           <span class="bandera" aria-hidden="true">🇨🇿</span>
           <span class="es" lang="es">República Checa</span>
@@ -381,27 +496,6 @@
             <p class="ciudad">
               <span class="es" lang="es">Praga</span>
               <span class="en" lang="en">Prague</span>
-            </p>
-          </li>
-
-        </ul>
-      </section>
-
-
-      <!-- ================= ESPAÑA ================= -->
-      <section class="pais">
-        <h2>
-          <span class="bandera" aria-hidden="true">🇪🇸</span>
-          <span class="es" lang="es">España</span>
-          <span class="en" lang="en">Spain</span>
-        </h2>
-        <ul class="pizzerias">
-
-          <li class="pizzeria">
-            <h3><a href="https://www.google.com/maps?cid=5222548488980104834" target="_blank" rel="noopener">Trattoria Increscendo</a></h3>
-            <p class="ciudad">
-              <span class="es" lang="es">Arganzuela, Madrid</span>
-              <span class="en" lang="en">Arganzuela, Madrid</span>
             </p>
           </li>
 
@@ -421,6 +515,11 @@
        celular no está en español. Todo el contenido ya está en el HTML. -->
   <script>
     (function () {
+      // cierra el menú de países al elegir uno o al tocar afuera
+      var menu = document.querySelector('.menu');
+      document.addEventListener('click', function (e) {
+        if (!menu.contains(e.target) || e.target.closest('a')) menu.removeAttribute('open');
+      });
       var es = document.getElementById('lang-es'), en = document.getElementById('lang-en'), saved = null;
       try { saved = localStorage.getItem('lang'); } catch (e) {}
       function set(l) { (l === 'en' ? en : es).checked = true; document.documentElement.lang = l; }
